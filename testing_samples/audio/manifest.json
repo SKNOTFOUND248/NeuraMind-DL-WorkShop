@@ -1,0 +1,42 @@
+[
+  {
+    "act": 1,
+    "title": "Introduction to the Artificial Neuron",
+    "text": "Welcome to NeuraMind. In deep learning, every neural network begins with an atomic computational unit: the artificial neuron.",
+    "file": "act_1.wav",
+    "duration": 9.07,
+    "path": "D:\\Neuramind\\DL_workshop\\testing_samples\\audio\\act_1.wav"
+  },
+  {
+    "act": 2,
+    "title": "Forward Pass & Linear Combination",
+    "text": "The neuron receives input features, multiplies them by connection weights, adds a bias, and passes the sum through an activation function.",
+    "file": "act_2.wav",
+    "duration": 9.31,
+    "path": "D:\\Neuramind\\DL_workshop\\testing_samples\\audio\\act_2.wav"
+  },
+  {
+    "act": 3,
+    "title": "Geometric Decision Boundary",
+    "text": "In feature space, this linear formula forms a decision boundary line, separating positive and negative classes.",
+    "file": "act_3.wav",
+    "duration": 7.84,
+    "path": "D:\\Neuramind\\DL_workshop\\testing_samples\\audio\\act_3.wav"
+  },
+  {
+    "act": 4,
+    "title": "Real Learning in Action",
+    "text": "When an untrained model misclassifies a point, the learning rule triggers. It adjusts weights to pull the boundary directly toward the error.",
+    "file": "act_4.wav",
+    "duration": 9.16,
+    "path": "D:\\Neuramind\\DL_workshop\\testing_samples\\audio\\act_4.wav"
+  },
+  {
+    "act": 5,
+    "title": "Convergence & Deep Learning Bridge",
+    "text": "Through iterative updates, the boundary converges to zero error. Stacking these simple units creates deep learning.",
+    "file": "act_5.wav",
+    "duration": 7.92,
+    "path": "D:\\Neuramind\\DL_workshop\\testing_samples\\audio\\act_5.wav"
+  }
+]
