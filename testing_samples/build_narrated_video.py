@@ -1,5 +1,5 @@
 """
-Master Orchestrator: Generate Native TTS Audio, Render Manim Scene, and Mux Narrated Video
+Master Orchestrator: Generate Kokoro Neural Audio, Render Manim Scene, and Mux Narrated Video
 """
 
 import os
@@ -25,23 +25,24 @@ def merge_wavs(wav_files, output_path):
     return total_sec
 
 
-def main():
+def main(voice="am_michael", force_regenerate_audio=False):
     base_dir = os.path.dirname(os.path.abspath(__file__))
     audio_dir = os.path.join(base_dir, "audio")
     exports_dir = os.path.join(base_dir, "exports")
     os.makedirs(exports_dir, exist_ok=True)
 
     print("=" * 60)
-    print(" NeuraMind Workshop: Building Narrated Sample Visualization")
+    print(" NeuraMind Workshop: Building Kokoro-Narrated Video")
+    print(f" Voice Persona: {voice} (Kokoro-82M)")
     print("=" * 60)
 
     # 1. Generate or verify TTS Audio
     manifest_path = os.path.join(audio_dir, "manifest.json")
-    if not os.path.exists(manifest_path):
-        print("\n[Step 1/3] Generating Native TTS audio narrations...")
-        manifest = generate_narration()
+    if force_regenerate_audio or not os.path.exists(manifest_path):
+        print("\n[Step 1/3] Generating Kokoro Neural TTS narration...")
+        manifest = generate_narration(voice=voice)
     else:
-        print("\n[Step 1/3] Found existing TTS audio manifest.")
+        print("\n[Step 1/3] Found existing narration manifest.")
         with open(manifest_path, "r") as f:
             manifest = json.load(f)
 
@@ -70,6 +71,7 @@ def main():
     if proc.returncode != 0:
         print("Manim rendering failed!")
         print(proc.stderr)
+        print(proc.stdout)
         sys.exit(1)
 
     print("Manim render completed successfully!")
@@ -85,7 +87,7 @@ def main():
     print(f"-> Raw video rendered at: {rendered_mp4}")
 
     # 3. Mux Video + Audio with FFmpeg
-    print("\n[Step 3/3] Muxing video and native TTS audio with FFmpeg...")
+    print("\n[Step 3/3] Muxing video and Kokoro neural audio with FFmpeg...")
     final_output = os.path.join(exports_dir, "deep_learning_atom_narrated.mp4")
 
     cmd_mux = [
@@ -111,9 +113,9 @@ def main():
     print(f"  File: {final_output}")
     print(f"  Size: {file_size_mb:.2f} MB")
     print(f"  Duration: ~{total_audio_sec:.1f} seconds")
+    print(f"  Voice: {voice} (Kokoro-82M)")
     print("=" * 60)
 
 
 if __name__ == "__main__":
-    main()
-
+    main(voice="am_michael", force_regenerate_audio=False)

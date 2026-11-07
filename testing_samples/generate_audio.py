@@ -1,9 +1,13 @@
+"""
+Generates narration audio clips for the workshop video using Kokoro-82M (voice='am_michael').
+"""
+
 import os
 import json
-from tts_engine import NativeTTS
+from kokoro_engine import KokoroTTS
 
-def generate_narration():
-    tts = NativeTTS(rate=0)
+def generate_narration(voice="am_michael"):
+    tts = KokoroTTS(voice=voice)
     audio_dir = os.path.join(os.path.dirname(__file__), "audio")
     os.makedirs(audio_dir, exist_ok=True)
 
@@ -41,22 +45,23 @@ def generate_narration():
     ]
 
     manifest = []
-    print("Generating Native TTS audio files...")
+    print(f"\nGenerating Kokoro Neural TTS Audio ({voice})...\n")
     for item in scripts:
         out_path = os.path.join(audio_dir, item["file"])
         dur = tts.generate_audio(item["text"], out_path)
         item["duration"] = round(dur, 2)
         item["path"] = out_path
+        item["voice"] = voice
         manifest.append(item)
-        print(f"[{item['file']}] {item['duration']}s -> {item['text'][:50]}...")
+        print(f"  [Act {item['act']}] {item['duration']}s -> {item['file']}")
+        print(f"      Text: \"{item['text'][:65]}...\"")
 
     manifest_path = os.path.join(audio_dir, "manifest.json")
     with open(manifest_path, "w") as f:
         json.dump(manifest, f, indent=2)
 
-    print(f"\nManifest saved to {manifest_path}")
+    print(f"\nManifest saved to: {manifest_path}")
     return manifest
 
 if __name__ == "__main__":
-    generate_narration()
-
+    generate_narration(voice="am_michael")
