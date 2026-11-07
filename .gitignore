@@ -218,3 +218,12 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Manim temporary rendering artifacts & partial movie chunks
+**/partial_movie_files/
+**/media/Tex/
+**/media/texts/
+media/
+visualisations/media/
+testing_samples/media/
+visualisations/latex_cache/
